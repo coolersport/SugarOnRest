@@ -3,9 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>com.genix.platform4</groupId>
+		<artifactId>com.genix.platform4.maven-support</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+	</parent>
+
 	<groupId>com.sugaronrest</groupId>
 	<artifactId>sugaronrest</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
