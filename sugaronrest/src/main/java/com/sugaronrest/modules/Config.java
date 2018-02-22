@@ -49,7 +49,7 @@ public class Config {
     }
 
     public void setValue(String value) {
-        value = value;
+        this.value = value;
     }
 
     @JsonProperty("category")
