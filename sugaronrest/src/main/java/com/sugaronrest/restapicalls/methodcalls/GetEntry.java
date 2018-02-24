@@ -107,7 +107,7 @@ public class GetEntry {
                     readEntryResponse.setError(errorResponse);
 
                     readEntryResponse.setStatusCode(HttpStatus.SC_OK);
-                    if (errorResponse == null) {
+                    if (errorResponse != null) {
                         errorResponse.setStatusCode(errorResponse.getStatusCode());
                     }
                 } else {
