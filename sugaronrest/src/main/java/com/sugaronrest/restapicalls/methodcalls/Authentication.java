@@ -36,6 +36,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.xml.bind.DatatypeConverter;
 
 
 public class Authentication {
@@ -52,8 +53,7 @@ public class Authentication {
 
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
-            String passwordHash = new BigInteger(1, md5.digest(loginRequest.password.getBytes()))
-                    .toString(16);
+            String passwordHash = DatatypeConverter.printHexBinary(md5.digest(loginRequest.password.getBytes()));
 
             Map<String, String> userCredentials = new LinkedHashMap<String, String>();
             userCredentials.put("user_name", loginRequest.username);
