@@ -30,6 +30,7 @@ import com.sugaronrest.utils.JsonObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -65,13 +66,21 @@ public class EntryList
         Map<String, Object> entity = new HashMap<String,Object>();
         ObjectMapper mapper = JsonObjectMapper.getMapper();
 
-        Map<String, Object> nameValueMap = (Map<String, Object>)nameValueList;
-        for (Map.Entry<String, Object> entry : nameValueMap.entrySet()) {
-            String key = entry.getKey();
-            String jsonValue = mapper.writeValueAsString(entry.getValue());
-            EnityItem entryItem = mapper.readValue(jsonValue, EnityItem.class);
-
-            entity.put(entryItem.name, entryItem.value);
+        if (nameValueList instanceof Map) {
+            Map<String, Object> nameValueMap = (Map<String, Object>)nameValueList;
+            for (Map.Entry<String, Object> entry : nameValueMap.entrySet()) {
+                String key = entry.getKey();
+                String jsonValue = mapper.writeValueAsString(entry.getValue());
+                EnityItem entryItem = mapper.readValue(jsonValue, EnityItem.class);
+    
+                entity.put(entryItem.name, entryItem.value);
+            }
+        } else if (nameValueList instanceof List) {
+            List<Map<String, String>> valuePairs = (List<Map<String, String>>) nameValueList;
+            for (Map<String, String> valuePair : valuePairs) {
+                if (valuePair.size() == 2 && valuePair.containsKey("name"))
+                    entity.put(valuePair.get("name"), valuePair.get("value"));
+            }
         }
 
         return entity;
